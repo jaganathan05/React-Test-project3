@@ -3,28 +3,37 @@ import NotesContext from "./NotesContext"
 
 function NotesContextProvider (props){
 const [data ,setData] = useState(null)
+const [count,setcount] = useState(0)
+const [addnote,setaddnote] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch('https://crudcrud.com/api/7109fa7396804d2c8538f9fcd65ec16a');
+            const response = await fetch('https://react-api-test-d5c70-default-rtdb.firebaseio.com/Notes.json');
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
             const jsonData = await response.json();
-            setData(jsonData);
+            const notesArray = Object.values(jsonData)
+            setData(notesArray);
+            setcount (notesArray.length)
           } catch (error) {
             console.error('Error fetching data:', error);
           }
         };
     
         fetchData();
-      }, []);
+      }, [addnote]);
 
+      const addnotehandler = () =>{
+        setaddnote(true)
+      }
 
 
     const notevalues = { 
-        NotesList : data
+        NotesList : data,
+        TotalCount : count,
+        addnote : addnotehandler
 
     }
     console.log(notevalues)

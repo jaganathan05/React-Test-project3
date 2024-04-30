@@ -1,7 +1,9 @@
 import React from "react";
 
 const NotesContext = React.createContext({
-    NotesList : []
+    NotesList : [],
+    TotalCount: 0,
+    addnote : ()=>{}
 
 })
 

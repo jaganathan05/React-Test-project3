@@ -1,8 +1,10 @@
-import React, { useRef, useState }  from "react";
+import React, { useContext, useRef, useState }  from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import Model from "../Model/Model";
+import NotesContext from "../../Contexts/NotesContext";
 
 function NoteForm (props){
+    const notectx = useContext(NotesContext)
     const [show,setshow] = useState(props.show) 
     const Titleref = useRef ()
     const DescRef = useRef()
@@ -20,7 +22,7 @@ function NoteForm (props){
 
         console.log(data)
 
-        const response = await fetch ('https://crudcrud.com/api/7109fa7396804d2c8538f9fcd65ec16a',{
+        const response = await fetch ('https://react-api-test-d5c70-default-rtdb.firebaseio.com/Notes.json',{
             method : 'post',
             headers: {
                 "Content-Type": "application/json",
@@ -30,6 +32,7 @@ function NoteForm (props){
 
         if(response.ok){
             console.log(response)
+            notectx.addnote()
             Titleref.current.value =''
             DescRef.current.value =''
             setshow(false)

@@ -1,3 +1,19 @@
-.notepage {
+.notes-box {
     text-align: center;
+    margin: 20px auto;
+    border: 2px solid blue;
+    width: 400px;
+    padding: 20px;
+}
+.notes-container {
+    display: flex;
+   align-items: center;
+   flex-direction: column;
+}
+.notes li{
+    list-style:decimal;
+    color:blue;
+    font-size: 30px;
+
+
 }
